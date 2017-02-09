@@ -1,1 +1,2 @@
-Blablabla
+Mise à jour :
+Correction des bugs ...
