@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+//Point de départ de l'application
 public class MainActivity extends AppCompatActivity {
 
     private LocationManager locationManager = null;
@@ -30,11 +31,9 @@ public class MainActivity extends AppCompatActivity {
     public ProgressBar getProgressBar() {
         return progressBar;
     }
-
     public void setProgressBar(ProgressBar progressBar) {
         this.progressBar = progressBar;
     }
-
     public ProgressBar progressBar = null;
 
     @Override
@@ -46,13 +45,14 @@ public class MainActivity extends AppCompatActivity {
         btnCarteParkings = (Button)findViewById(R.id.button2);
         progressBar =  (ProgressBar)findViewById(R.id.progressBar);
 
-        //Gestion de la géolocalisation - à vérifier
+        //Gestion de la géolocalisation via GPS
         locationManager = (LocationManager) getSystemService(getApplicationContext().LOCATION_SERVICE);
 
         try {
             gps_enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         } catch(Exception ex) {}
 
+        //Si GPS n'est pas activé, on envoit l'utilisateur sur les paramètres pour l'activer
         if(!gps_enabled)
         {
             startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             coordGPS[0] = pos.getLatitude();
             coordGPS[1] = pos.getLongitude();
         }
+        //Si la géolocalisation ne fonctionne pas (exemple Nox) on met des valeurs par défaut
         else
         {
             coordGPS = new double[2];
